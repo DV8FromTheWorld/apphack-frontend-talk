@@ -56,6 +56,7 @@ module.exports = {
   },
   devtool: '#eval-source-map',
   plugins: [
+    //Build the index.html page in the dist folder. Auto-inject the build.js bundle.
     new webpackHtml({
       template: "./src/index.html"
     })

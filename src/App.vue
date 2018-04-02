@@ -1,60 +1,113 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div>
+    <header>Kittens for Adoption</header>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+
+  export default {
+    name: 'KittenApp'
   }
-}
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  html {
+    font-family: 'Lato', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+  }
 
-h1, h2 {
-  font-weight: normal;
-}
+  * + * {
+    margin-top: 1em;
+  }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-}
+  body {
+    font-size: 1.4rem;
+  }
 
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #369
+  }
 
-a {
-  color: #42b983;
-}
+  a, a:visited {
+    color: #69c;
+    text-decoration: underline;
+    transition: all .2s ease;
+  }
+  a:hover{
+    color: #9cf;
+  }
+  a:active{
+    color: #036;
+  }
+
+  main{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+  }
+
+  header {
+    background: #036;
+    color: #9cf;
+    font-size: 2rem;
+    padding: 1em .8em;
+  }
+
+  header a, header a:visited {
+    text-decoration: none;
+    margin-right: 10px;
+  }
+
+  table{
+    border: none;
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 2px
+  }
+
+  table tr {
+    border-bottom: 1px solid #9cf;
+  }
+  table thead tr {
+    border-bottom: 2px solid #369;
+    text-align: left;
+    background-color: #69c;
+    color: #fff;
+    padding: .6em .4em;
+  }
+
+  table th {
+    padding: .6em .4em;
+  }
+
+  table th {
+    font-weight: bold;
+  }
+
+  table td {
+    padding: .4em;
+  }
+
+  figure {
+    float: right;
+    border: 1px solid #369;
+    padding: 1em;
+    text-align: center;
+    border-radius: 2px;
+    box-shadow: 0 4px 4px -4px #999;
+  }
+
+  figure > img {
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+  figcaption {
+    font-size: 1.5rem;
+  }
 </style>

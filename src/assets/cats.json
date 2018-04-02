@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Mrs. Bigglesworth",
+    "breed": "British Shorthair",
+    "color": "Gray",
+    "gender": "Female",
+    "age": "6 Months",
+    "birthday": "8/04/2017",
+    "picture": "http://cdn2-www.cattime.com/assets/uploads/gallery/british-shorthair-cats-and-kittens/british-shorthair-cats-and-kittens-5.jpg",
+    "likes": ["Tuna", "Long walks", "Warm laps to lay on"],
+    "dislikes": ["Water"]
+  },
+  {
+    "id": 2,
+    "name": "Meowertins",
+    "breed": "Maine Coon",
+    "color": "Brown",
+    "gender": "Male",
+    "age": "9 Months",
+    "birthday": "5/01/2017",
+    "picture": "http://cdn1-www.cattime.com/assets/uploads/gallery/maine-coon-cats-and-kittens/maine-coon-cats-and-kittens-1.jpg",
+    "likes": ["Playing", "Kids"],
+    "dislikes": ["Other male cats"]
+  },
+  {
+    "id": 3,
+    "name": "Princess Stinkybottoms McPoopsalot",
+    "breed": "Turkish Van",
+    "color": "White & Gold",
+    "gender": "Female",
+    "age": "3 Months",
+    "birthday": "01/22/2018",
+    "picture": "https://i.imgur.com/B6e2FgJ.jpg",
+    "likes": ["Jumping on the counter", "yarn"],
+    "dislikes": ["Using the liter box"]
+  },
+  {
+    "id": 4,
+    "name": "Lucifurr",
+    "breed": "Sphynx",
+    "color": "Gray",
+    "gender": "Male",
+    "age": "11 Months",
+    "birthday": "04/30/2017",
+    "picture": "https://static1.squarespace.com/static/53c5b010e4b0c3db71b3067c/55bab0a4e4b0bf981e7eaa17/55bab1c9e4b02c50d76ae42b/1438298573773/sphynx-cat-photos-by-alicia-rius-25.jpg?format=300w",
+    "likes": [],
+    "dislikes": ["Everything!"]
+  }
+]
