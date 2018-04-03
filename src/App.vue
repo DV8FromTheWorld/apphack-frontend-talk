@@ -1,60 +1,68 @@
+<style>
+
+</style>
+
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div>
+    <header>Kittens for Adoption</header>
+    <main>
+      <div v-if="selectedCat" >
+        <button @click="handleCatSelect(null)">Return to Table</button>
+        <CatDetail v-bind="selectedCat" />
+      </div>
+      <div v-else>
+        <h1>Kittens</h1>
+        <input
+          type="text"
+          placeholder="Search"
+          @input="handleSearch" />
+        <table>
+          <thead>
+          <tr>
+            <th>Kitten Name</th>
+            <th>Breed</th>
+            <th>Gender</th>
+            <th>Age</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="cat in cats">
+            <td><a @click="handleCatSelect(cat)">{{cat.name}}</a></td>
+            <td>{{cat.breed}}</td>
+            <td>{{cat.gender}}</td>
+            <td>{{cat.age}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  import CatMock from './assets/CatMock.json'
+  import CatDetail from './components/CatDetail.vue'
+
+  export default {
+    data() {
+      return {
+        cats: CatMock,
+        selectedCat: null
+      }
+    },
+    methods: {
+      handleSearch(e) {
+        //console.log(e) - step through this.
+        let searchValue = e.target.value
+
+        this.cats = CatMock.filter(cat => cat.name.indexOf(searchValue) !== -1)
+      },
+      handleCatSelect(cat) {
+        this.selectedCat = cat
+      }
+    },
+    components: {
+      CatDetail
     }
   }
-}
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-</style>

@@ -1,0 +1,97 @@
+html {
+  font-family: 'Lato', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+}
+
+* + * {
+  margin-top: 1em;
+}
+
+body {
+  font-size: 1.4rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #369
+}
+
+a, a:visited {
+  color: #69c;
+  text-decoration: underline;
+  transition: all .2s ease;
+}
+a:hover{
+  color: #9cf;
+}
+a:active{
+  color: #036;
+}
+
+main{
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+header {
+  background: #036;
+  color: #9cf;
+  font-size: 2rem;
+  padding: 1em .8em;
+}
+
+header a, header a:visited {
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+table{
+  border: none;
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 2px
+}
+
+table tr {
+  border-bottom: 1px solid #9cf;
+}
+table thead tr {
+  border-bottom: 2px solid #369;
+  text-align: left;
+  background-color: #69c;
+  color: #fff;
+  padding: .6em .4em;
+}
+
+table th {
+  padding: .6em .4em;
+}
+
+table th {
+  font-weight: bold;
+}
+
+table td {
+  padding: .4em;
+}
+
+figure {
+  float: right;
+  border: 1px solid #369;
+  padding: 1em;
+  text-align: center;
+  border-radius: 2px;
+  box-shadow: 0 4px 4px -4px #999;
+}
+
+figure > img {
+  max-width: 400px;
+  max-height: 400px;
+}
+
+figcaption {
+  font-size: 1.5rem;
+}
