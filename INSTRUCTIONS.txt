@@ -1,0 +1,262 @@
+Overview
+==========
+list rendering
+input/change events
+dual-binding of data
+conditional rendering
+components
+prop passing
+routing
+
+
+1) Cleanup
+clean app.vue
+remove assets folder
+put style tag over template tags.
+
+2) Add styles - add to index.js (import)
+I've already created styles, you can get them here:
+https://github.com/DV8FromTheWorld/apphack-frontend-talk/blob/steps/src/styles.css
+(need to change this to a standalone file)
+
+3) Create our page layout
+main - treated like a "div"
+<div>
+  <header>Kittens for Adoption</header>
+  <main>
+    <div>
+      <h1>Kittens Currently up for Adoption</h1>
+    </div>
+  </main>
+</div>
+
+4) create a table
+<table>
+  <thead>
+    <tr>
+      <th>Kitten Name</th>
+      <th>Breed</th>
+      <th>Gender</th>
+      <th>Age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mrs Bigglesworth</td>
+      <td>British Shorthair</td>
+      <td>Female</td>
+      <td>6 Months</td>
+    </tr>
+  </tbody>
+</table>
+
+4) Create assets/CatMock.json
+https://github.com/DV8FromTheWorld/apphack-frontend-talk/blob/steps/src/assets/CatMock.json
+console.log(Cats) - refresh page to show.
+data() cats = Cats
+
+5) v-for the list
+<tr v-for="cat in cats">
+  <td>{{cat.name}}</td>
+  <td>{{cat.breed}}</td>
+  <td>{{cat.gender}}</td>
+  <td>{{cat.age}}</td>
+</tr>
+
+6) Add search box
+  6.1) Input box
+    explain @input vs @change
+    <input
+        type="text"
+        placeholder="Search"
+        @input="handleSearch" />
+
+  6.2) handleSearch method
+    print out e to show what it represents.
+    methods: {
+      handleSearch(e) {
+        let searchValue = e.target.value
+
+        this.cats = CatMock.filter(cat => cat.name.indexOf(searchValue) !== -1)
+      }
+    }
+
+  6.3) Demo + why this works. 2 way binding of data, dom rerender, etc.
+
+7) v-if / v-else
+Conditional rendering
+    - add showTable: true to data()
+    - <button @click="handleButton">Show / Hide</button>
+    - <div v-if="showTable">
+    - handleButton(e) {
+        this.showTable = !this.showTable
+      }
+
+    use v-else to further show something. Do at runtime.
+
+8) CatDetail
+Create a semi-empty component with basically "hello world" in it.
+Import into App.vue, add to component map, add to template
+    <div>
+        <h1>Kitten Details</h1>
+        <p>Hi, I am a CatDetail component!</p>
+    </div>
+
+9) Introduce props
+Add "name" prop, no default, no require. Show that it rendered without a value.
+Give default - Demo
+Make required - Demo error
+pass name to <CatDetail />
+
+9.1) For fun, connect the value of search to the CatDetail input
+Introduction to : as js rendering attr
+v-model on the search
+:name
+
+10) cleanup. Remove v-model, searchValue, show hide button, handleButton method, kitten details. Keep showTable bool
+11) cat select.
+    Lets show the detail on click via v-if
+    change cat name line to
+    <td><a @click="handleCatSelect(cat)">{{cat.name}}</a></td>
+
+    data -> selectedCat : null
+
+    handleCatSelect(cat) {
+        this.showTable = false
+        this.selectedCat = cat
+    }
+
+    v-else CatDetail
+    explain to remove showTable and rely on selectedCat
+    <CatDetail v-if="selectedCat" :name="selectedCat.name" />
+
+12) Flesh out CatDetail
+look at json. add props.
+props: {
+  name: String,
+  breed: String,
+  gender: String,
+}
+
+<CatDetail v-if="selectedCat" :name="selectedCat.name" :breed="selectedCat.breed" :gender="selectedCat.gender" />
+
+<p><strong>Name: </strong>{{name}}</p>
+<p><strong>Breed: </strong>{{breed}}</p>
+<p><strong>Gender: </strong>{{gender}}</p>
+
+13) Expand details to show everything
+    Look at json again, mirror props
+
+    props: {
+      name: String,
+      breed: String,
+      gender: String,
+      color: String,
+      birthday: String,
+      picture: String,
+      likes: {
+        type: Array,
+        default: () => []
+      },
+      dislikes: {
+        type: Array,
+        default: () => []
+      }
+    }
+
+    switch from specific :attr binding to v-bind="selectedCat"
+
+    <p><strong>Breed: </strong>{{breed}}</p>
+    <p><strong>Color: </strong>{{color}}</p>
+    <p><strong>Birthday: </strong>{{birthday}}</p>
+    <p><strong>Gender: </strong>{{gender}}</p>
+
+14) Add picture
+<figure>
+  <img :src="picture">
+  <figcaption>{{name}}</figcaption>
+</figure>
+
+15) Add likes and dislikes
+Explain the use of .length
+
+<section v-if="likes.length">
+  <h4>Likes</h4>
+  <ul>
+    <li v-for="like in likes">{{like}}</li>
+  </ul>
+</section>
+<section v-if="dislikes.length">
+  <h4>Dislikes</h4>
+  <ul>
+    <li v-for="dislike in dislikes">{{dislike}}</li>
+  </ul>
+</section>
+
+16) We need a way to get back to the table.
+Move render to a div, add button, clear cat select.
+<div v-if="selectedCat" >
+    <button @click="handleCatSelect(null)">Return to Table</button>
+    <CatDetail v-bind="selectedCat" />
+</div>
+
+17) Router Concept Introduction
+This is nice, but you can't share a link to this.
+param based routing
+pages
+vue-router
+
+18) Make Details.vue Page
+remove v-if, v-else, selectedCat, etc
+mention that we will return to the button
+import CatDetail, add to components map.
+
+19) Add the router
+npm i --save vue-router
+
+  19.1) Add router to index.js
+  Vue.use(Router)
+
+  const router = new Router({
+  routes: [
+      { path: "/cats", component: null },
+      { path: "/cats/:id/details", component: DetailsPage},
+      { path: '*', redirect: '/cats'}
+    ]
+  })
+
+  19.2) Add router-view to App.vue, below table.
+
+20) Make the table names into router-links
+<td><router-link :to="`/cats/${cat.id}/details`">{{cat.name}}</router-link></td>
+click to show that it doesn't actually work.
+
+21) Modify Details page to pull the CatMock value.
+data() {
+  return {
+    selectedCat: null
+  }
+},
+created() {
+  let catId = this.$route.params.id
+
+  this.selectedCat = CatMock.find(cat => cat.id == catId)
+},
+
+22) Make Search.vue Page
+copy export default
+change index.js path to:
+{ path: "/cats", component: SearchPage },
+
+23) Finally, fix Details page "return" button.
+<router-link to="/cats">Return to Table</router-link>
+<router-link to="/cats"><button>Return to Table</button></router-link>
+
+24) 404 page
+<CatDetail v-if="selectedCat" v-bind="selectedCat" />
+<div v-else>
+  <p>No Cat was found with that id!</p>
+</div>
+
+
+
